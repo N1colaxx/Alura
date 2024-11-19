@@ -1,7 +1,6 @@
 {
-  "name": "",
+  "name": "instalike-back",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "type": "module",
   "license": "AGPL-version-3.0",
@@ -17,16 +16,14 @@
   },
   "bugs": "",
   "keywords": [],
-  "author": {
-    "name": "",
-    "email": "",
-    "url": ""
-  },
+  "author": "",
   "contributors": [],
   "scripts": {
     "dev": "",
-    "test": ""
+    "test": "",
+    "start": "node server.js"
   },
+  "description": "",
   "dependencies": {
     "express": "^4.21.1"
   }
