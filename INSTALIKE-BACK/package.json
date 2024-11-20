@@ -19,12 +19,12 @@
   "author": "",
   "contributors": [],
   "scripts": {
-    "dev": "",
-    "test": "",
-    "start": "node server.js"
+    "dev": "node --watch --env-file=.env server.js",
+    "test": ""
   },
   "description": "",
   "dependencies": {
-    "express": "^4.21.1"
+    "express": "^4.21.1",
+    "mongodb": "^6.10.0"
   }
 }
