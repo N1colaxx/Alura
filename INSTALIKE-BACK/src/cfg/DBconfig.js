@@ -1,6 +1,15 @@
 import { MongoClient } from 'mongodb';
+import dotenv from 'dotenv';
 
-export default async function conectarAoBanco(stringConnection) {
+dotenv.config(); //Isso vai carregar as variáveis do arquivo .env
+
+export default async function conectarAoBanco() {
+  const stringConnection = process.env.STRING_CONNECTION;
+  if (!stringConnection) {
+    console.error('String de conexão não definida!');
+    process.exit(1);   // Encerra o programa caso a string de conexão não esteja definida
+  }
+
   let mongoClient;
 
   try {
@@ -15,3 +24,5 @@ export default async function conectarAoBanco(stringConnection) {
       process.exit();
   }
 }
+
+
