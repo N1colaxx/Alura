@@ -1,5 +1,6 @@
-import { getAllPosts, createdPost, createdComent  } from "../Models/PostsModels.js";
-import fs from "fs";
+import { error } from "console";
+import { getAllPosts, createdPost, createdComent, getPostDoID, getDoTipoQuery  } from "../Models/PostsModels.js";
+import fs, { accessSync } from "fs";
 
 export async function listAllPosts(req, res) {
     const posts = await getAllPosts()
@@ -16,8 +17,6 @@ export async function publishNewPost(req, res) {
         res.status(500).json({"Erro":"Falha na requisição"})
     }
 }
-
-
 
 export async function uploadImagem (req, res) {
     const newPost = {
@@ -53,4 +52,44 @@ export async function uploadComentario(req, res) {
     }
 }
 
+export async function buscaPostPorID(req, res) {
+    try {
+        const idDoPost = req.params;
+        const postDoId = await getPostDoID.findById(idDoPost);
 
+        if (!postDoId) {
+            res.status(404).json({message: "Post não encontrado!"});
+        } else {
+            res.status(200).json(postDoId);
+        }
+    }  catch (erro) {
+        console.error(erro.message);
+        res.status(500).json({"Erro":"falha na requisição!"});
+    }
+}
+
+
+export async function buscaTapyQuery(req, res) {
+    try {
+        const descricao = req.query.descricao || ''; // Obtém a descrição da query string
+        const limit = req.query.limit ? parseInt(req.query.limit, 10) : 0; // Limite de resultados
+
+        // Consulta no banco de dados com filtro de descrição (case-insensitive)
+        const query = descricao
+            ? { description: { $regex: `.*${descricao}.*`, $options: 'i' }} // Regex case-insensitive
+            : {};
+
+        // Realiza a consulta usando o modelo getDoTipoQuery
+        const filteredPosts = await getDoTipoQuery.find(query).limit(limit);
+
+        // Verifica se encontrou algum post
+        if (filteredPosts.length > 0) {
+            return res.status(200).json(filteredPosts); // Retorna os posts encontrados
+        } else {
+            return res.status(404).json({ message: "Nenhum post encontrado" }); // Caso não encontre
+        }
+    } catch (erro) {
+        console.error("Erro na busca:", erro.message);
+        return res.status(500).json({ message: "Erro ao buscar no banco de dados" }); // Erro no servidor
+    }
+}

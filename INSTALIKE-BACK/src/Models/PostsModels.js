@@ -15,10 +15,36 @@ export async function createdPost(novoPost){
     return colecao.insertOne(novoPost)
 }
 
-export async function createdComent(novoPost){
+export async function createdComent(novoComentario){
     const db = conexao.db("imersao-instabytes")
     const colecao = db.collection("coments")
-    return colecao.insertOne(novoPost)
+    return colecao.insertOne(novoComentario)
+}
+
+export async function getPostDoID(pegandoPostPeloID){
+    const db = conexao.db("imersao-instabytes")
+    const colecao = db.collection("coments")
+    return colecao.insertOne(pegandoPostPeloID)
 }
 
 
+import mongoose from 'mongoose';
+
+
+// Definindo o esquema do Post
+const postSchema = new mongoose.Schema({
+    description: { type: String, required: true },
+    imgURL: { type: String, required: true },
+});
+
+// Criando o modelo
+const Post = mongoose.model('Post', postSchema);
+
+// Função para buscar posts com base em uma query
+export async function getDoTipoQuery(buscaPorQuery) {
+    const db = conexao.db("imersao-instabytes");
+    const colecao = db.collection("posts");
+    return colecao.find(buscaPorQuery).toArray();
+}
+
+export default Post;
