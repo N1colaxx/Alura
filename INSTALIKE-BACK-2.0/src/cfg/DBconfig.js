@@ -3,11 +3,12 @@ import  mysql  from 'mysql2/promise';
 
 
 dotenv.config(); //Isso vai carregar as variáveis do arquivo .env
-console.log('DB_HOST:', process.env.DB_HOST);
-console.log('DB_USER:', process.env.DB_USER);
-console.log('DB_PORT:', process.env.DB_PORT);
-console.log('DB_PASSWORD:', process.env.DB_PASSWORD);
-console.log('DB_NAME:', process.env.DB_NAME);
+// logs para monitorar 
+// console.log('DB_HOST:', process.env.DB_HOST);
+// console.log('DB_USER:', process.env.DB_USER);
+// console.log('DB_PORT:', process.env.DB_PORT);
+// console.log('DB_PASSWORD:', process.env.DB_PASSWORD);
+// console.log('DB_NAME:', process.env.DB_NAME);
 
 
 export default async function conectarAoBanco() {
@@ -15,7 +16,8 @@ export default async function conectarAoBanco() {
   const {DB_HOST, DB_USER, DB_PORT, DB_PASSWORD, DB_NAME} = process.env; 
 
   if (!DB_HOST || !DB_USER || !DB_NAME) {
-    console.log(process.env.DB_HOST, process.env.DB_USER,process.env.DB_PORT, process.env.DB_PASSWORD, process.env.DB_NAME);
+    // logs para monitorar 
+    //console.log(process.env.DB_HOST, process.env.DB_USER,process.env.DB_PORT, process.env.DB_PASSWORD, process.env.DB_NAME);
     console.error('Variaveis de conexão indefinidas!!');
     process.exit(1); // Encerra o programa caso as variáveis não estejam definidas
   }
@@ -30,9 +32,7 @@ export default async function conectarAoBanco() {
       database: DB_NAME,
     });
 
-
     console.log('Conectado ao MySQL com sucesso!!');
-    console.log(process.conexao)
     return conexao;
   } catch (erro) {
       console.error('Falha ao conectar ao banco!', erro);
