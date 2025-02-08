@@ -1,4 +1,4 @@
-import { MongoClient } from 'mongodb';
+import { MongoClient } from 'mongodb'; // Cliente fornecido pela biblioteca mongodb para conectar e interagir com bancos de dados MongoDB.
 import dotenv from 'dotenv';
 
 dotenv.config(); //Isso vai carregar as variáveis do arquivo .env
