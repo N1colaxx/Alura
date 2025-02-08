@@ -1,3 +1,11 @@
+
+
+// controller
+//      O que é?: É o "intermediário" entre o Model (dados) e a View (interface). O Controller recebe as ações do usuário e decide o que fazer com elas.
+//      Exemplo: Se o usuário clicar em um botão para cadastrar um novo usuário, o Controller vai pegar esses dados, enviar para o Model salvar no banco de dados, e depois pode    atualizar a View para mostrar uma confirmação.
+//      Resumindo: O Controller "controla" o fluxo entre os dados e o que o usuário vê.
+
+
 import { getAllPosts, createdPost, updatePost} from "../Models/PostsModels.js";
 import fs, { accessSync } from "fs";
 import { error } from "console";

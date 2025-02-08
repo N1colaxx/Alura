@@ -1,3 +1,9 @@
+
+// O que é?: É onde você coloca os dados e a lógica de como interagir com o banco de dados.
+// Exemplo: Se você tiver um site de usuários, o Model vai ser responsável por pegar, adicionar, editar e excluir usuários do banco de dados.
+// Resumindo: A Model é o "cérebro" para gerenciar os dados.
+
+
 import 'dotenv/config';
 import { ObjectId } from "mongodb";
 import conectarAoBanco from "../cfg/DBconfig.js";
@@ -11,7 +17,7 @@ export async function  getAllPosts(pegandoTodosPosts) {
     return colecao.find().toArray()
 }
 
-export async function createdPost(novoPost){
+export async function   createdPost(novoPost){
     const db = conexao.db("imersao-instabytes")
     const colecao = db.collection("posts")
     return colecao.insertOne(novoPost)
