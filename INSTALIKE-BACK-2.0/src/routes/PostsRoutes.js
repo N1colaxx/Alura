@@ -7,7 +7,7 @@ const corsOptions = {
     optionsSuccessStatus: 200
 }
 
-import {  listAllPosts, publicarNovoPost, uploadImagem, updateNewPost}  from "../controllers/PostsController.js";
+import {  listantoTodosPots, publicarNovoPost, uploadImagem, updateNewPost}  from "../controllers/PostsController.js";
 
 
 const storage = multer.diskStorage({
@@ -31,7 +31,7 @@ const routes = (app) => {
 
     app.put("/upload/:id", updateNewPost)
     
-    app.get("/posts", listAllPosts); // pega todos os post
+    app.get("/posts", listantoTodosPots); // pega todos os post
     
     // app.get("/buscaID", buscaPostPorID) // pega pelo Id 
     // app.get("/posts/query", buscaTapyQuery)

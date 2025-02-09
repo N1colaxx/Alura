@@ -8,6 +8,7 @@ import 'dotenv/config';
 import conectarAoBanco from "../cfg/DBconfig.js";
 
 
+
 export async function   criarNovoPost(novoPost){
     const dbConexao  = await conectarAoBanco();
     const {descricao, img_url, data_criacao} = novoPost;
@@ -28,10 +29,22 @@ export async function   criarNovoPost(novoPost){
     }
 };
 
-export async function  getAllPosts(pegandoTodosPosts) {
-    const db = conexao.db("imersao-instabytes")
-    const colecao = db.collection("posts")
-    return colecao.find().toArray()
+export async function  pegarTodosPosts(pegandoTodosPosts) {
+    const dbConexao  = await conectarAoBanco();
+    const query = "SELECT * FROM posts";
+
+    try {
+        const [resultado] = await dbConexao.execute(query);
+        console.log('Pego TODOS os posts com Sucesso!', resultado);
+        return resultado; 
+    } catch (erro) {
+        console.erro('Erro ao pegar os posts: ', erro);
+        throw erro;
+    } finally {
+        // Fecjar a coneção apos a operação
+        await dbConexao.end();
+        console.log('Conexão com DB fechada. ');
+    }
 }
 
 
